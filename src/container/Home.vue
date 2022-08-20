@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import Header from "./Header.vue";
-import PaperList from "./PaperList.vue";
+import Header from "../components/Header.vue";
+import PaperList from "../components/PaperList.vue";
 export default {
     name: "Container",
     components: {Header, PaperList}

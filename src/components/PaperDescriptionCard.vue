@@ -17,6 +17,7 @@
 
 <script>
 import {getCurrentInstance} from "vue";
+import {useRouter} from 'vue-router'
 
 export default {
     name: "PaperDescriptionCard",
@@ -46,9 +47,15 @@ export default {
     },
     setup() {
         const data = getCurrentInstance()
+        const router = useRouter()
         const methods = {
             goto() {
-                console.log(data.props.paperId)
+                router.push({
+                    name: 'PaperReader',
+                    params: {
+                        paperId: data.props.paperId
+                    }
+                })
             }
         }
         return {
