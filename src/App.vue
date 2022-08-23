@@ -1,11 +1,13 @@
 <template>
-    <n-config-provider :theme-overrides="{common: {fontWeightStrong: '600'}}">
-        <router-view class="page-style" />
-    </n-config-provider>
+    <n-loading-bar-provider>
+        <n-config-provider :theme-overrides="{common: {fontWeightStrong: '600'}}">
+            <router-view class="page-style" />
+            <n-back-top :right="100"/>
+        </n-config-provider>
+    </n-loading-bar-provider>
 </template>
 
-<script setup>
-
+<script setup lang="ts">
 </script>
 
 <style>

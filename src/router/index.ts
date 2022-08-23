@@ -1,6 +1,7 @@
 import * as VueRouter from 'vue-router'
 
-const routes = [
+
+const routes: VueRouter.RouteRecordRaw[] = [
     {
         path: '/',
         name: 'Home',

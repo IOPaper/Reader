@@ -3,9 +3,16 @@
         :title="title"
         embedded
         class="paper-card"
-        :bordered="bordered"
+        :bordered="false"
         @click="goto"
     >
+        <template v-slot:header-extra="">
+            <n-space>
+                <n-tag round :bordered="false" v-for="item in tags" :key="item">
+                    <n-text depth="1">{{ item }}</n-text>
+                </n-tag>
+            </n-space>
+        </template>
         <template v-if="preview" #cover>
             <n-image class="paper-card-image" :src="preview" object-fit="cover"/>
         </template>
@@ -15,26 +22,30 @@
     </n-card>
 </template>
 
-<script>
-import {getCurrentInstance} from "vue";
+<script lang="ts">
+import {defineComponent} from "vue";
 import {useRouter} from 'vue-router'
 
-export default {
+export default defineComponent({
     name: "PaperDescriptionCard",
     props: {
         title: {
             type: String,
             required: true
         },
-        bordered: {
-            type: Boolean,
-            required: false,
-            default: false
-        },
         preview: {
             type: String,
             required: false,
             default: ""
+        },
+        author: {
+            type: String,
+            required: true,
+            default: '匿名'
+        },
+        tags: {
+            type: Array,
+            required: false,
         },
         introduction: {
             type: String,
@@ -45,15 +56,14 @@ export default {
             required: true
         },
     },
-    setup() {
-        const data = getCurrentInstance()
+    setup(props) {
         const router = useRouter()
         const methods = {
             goto() {
                 router.push({
                     name: 'PaperReader',
                     params: {
-                        paperId: data.props.paperId
+                        paperId: props.paperId
                     }
                 })
             }
@@ -62,7 +72,7 @@ export default {
             ...methods
         }
     }
-}
+})
 </script>
 
 <style scoped>
